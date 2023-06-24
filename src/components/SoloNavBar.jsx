@@ -1,4 +1,4 @@
-import {useNavigate,useLocation } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import contextVinil from '../contexto/ContextVinil';
 import Container from 'react-bootstrap/Container';
@@ -8,13 +8,11 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 function SoloNavBar() {
-  const location = useLocation();
+  
   const { usuario, setUsuario } = useContext(contextVinil);
   
   console.log(usuario);
-  //const conLogin = location.pathname === '/publicaciones';
-
-  
+    
 
   const navigate = useNavigate();
 

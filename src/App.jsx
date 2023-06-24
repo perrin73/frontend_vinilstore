@@ -6,6 +6,7 @@ import Landing from './components/Landing';
 import SoloNavBar from './components/SoloNavBar';
 import NuevoAlbum from './components/user_privado/NuevoAlbum';
 import TusPublicaciones from './components/user_privado/TusPublicaciones';
+import Galeria from './components/Galeria';
 
 
 
@@ -25,6 +26,7 @@ function App() {
       <Route path="/register" element={<RegForm/>}/>
       <Route path="/newalbum" element={<NuevoAlbum/>}/>
       <Route path="/publicaciones" element={<TusPublicaciones/>}/>
+      <Route path="/galeria" element={<Galeria/>}/>
       
     </Routes>
     </BrowserRouter>
