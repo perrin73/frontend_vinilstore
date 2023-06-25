@@ -1,11 +1,15 @@
-import React, { useState, useEffect,useContext } from "react";
+import { Alert } from "react-bootstrap/";
+import React, { useState, useEffect,useContext,useRef } from "react";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import contextVinil from "../../contexto/ContextVinil";
 
 const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
   const [albumx, setAlbumx] = useState({});
   const { usuario, setUsuario } = useContext(contextVinil);
-
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertVariant, setAlertVariant] = useState('');
+  const precioRef = useRef();
+  const estadoRef = useRef();
   //*************
 
   useEffect(() => {
@@ -30,9 +34,62 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${usuario.token}`},
       body: JSON.stringify({albumid})
-      });
+      })
+      const data = await response.json();
+       
+       //response.ok ? alert(data.message): alert('sin response')
 
-      response ? alert(response): alert('sin response')
+       //***********************************
+       if (response.ok) {
+        setAlertMessage(data.message);
+        setAlertVariant('success');
+        setTimeout(()=>{setAlertMessage('');setMostrarAlbum(false)}, 3000);
+        
+       
+        
+      } else {
+        setAlertMessage('No se pudo eliminar');
+        setAlertVariant('danger');
+        setTimeout(()=>{setAlertMessage('')}, 3000);
+      }
+
+       //************************************
+
+      
+    } catch (error) {
+      console.log('Error al borrar:', error);
+    }
+  };
+
+  //*******************************
+  const editAlbum = async (albumid,precio,estado) => {
+    try {
+      const response = await fetch(`https://backend-vinilstore.vercel.app/editar`,
+      {method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${usuario.token}`},
+      body: JSON.stringify({albumid,precio,estado})
+      })
+      const data = await response.json();
+       
+       //response.ok ? alert(data.message): alert('sin response')
+
+       //***********************************
+       if (response.ok) {
+        setAlertMessage(data.message);
+        setAlertVariant('success');
+        setTimeout(()=>{setAlertMessage('');setMostrarAlbum(false)}, 3000);
+        
+       
+        
+      } else {
+        setAlertMessage('No se pudo eliminar');
+        setAlertVariant('danger');
+        setTimeout(()=>{setAlertMessage('')}, 3000);
+      }
+
+       //************************************
 
       
     } catch (error) {
@@ -43,6 +100,7 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
     
     <div className="card-group w-75 mx-auto pt-1 " style={{ height: "490px" }}>
       <div className="card p-5 fichalbum justify-content-center">
+      {alertMessage && <Alert className="fade show text-center" variant={alertVariant}>{alertMessage}</Alert>}
         <div>album: {albumx.name}</div>
         <div>artista: {albumx.artist}</div>
         <div>pistas:</div>
@@ -92,6 +150,7 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
                 step="1000"
                 placeholder="Precio"
                 defaultValue={precio}
+                ref={precioRef}
               />
             </div>
           </div>
@@ -99,7 +158,7 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
             <label htmlFor="estado" className="form-label">
               Estado:
             </label>
-            <select id="estado" className="form-select" defaultValue={estado}>
+            <select id="estado" className="form-select" defaultValue={estado} ref={estadoRef}>
               <option>Nuevo sellado</option>
               <option>Semi nuevo</option>
               <option>Defecto estetico</option>
@@ -108,7 +167,7 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
           </div>
         </div>
         <div className="d-flex justify-content-center">
-        <button type="button" className="w-25 mx-auto btn-sm btn btn-success">editar</button>
+        <button type="button" onClick={()=>{editAlbum(albumid,precioRef.current.value,estadoRef.current.value)}}className="w-25 mx-auto btn-sm btn btn-success">editar</button>
         <button type="button" onClick={()=>{borrAlbum(albumid)}} className="w-25 mx-auto btn-sm btn btn-danger">eliminar</button>
         </div>
       </div>

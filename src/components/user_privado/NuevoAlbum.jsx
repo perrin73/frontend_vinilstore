@@ -99,7 +99,7 @@ function NuevoAlbum() {
             {albumElegido.album.tracks && albumElegido.album.tracks.track[0] ? (
               <>
                 
-                <ul>
+                <ul className="lh-1">
                   
                   {albumElegido.album.tracks.track.map((pista, index) => (
                      

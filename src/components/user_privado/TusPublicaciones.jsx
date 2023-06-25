@@ -42,7 +42,7 @@ function TusPublicaciones() {
       fetchData();
 
       
-    }, []);
+    }, [mostrarAlbum]);
 
     
 
