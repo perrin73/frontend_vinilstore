@@ -85,7 +85,7 @@ function TusPublicaciones() {
        </div> 
       </div>
       )}
-     {mostrarAlbum && <Album artista={albumSeleccionado.artista} nombre={albumSeleccionado.nombre} precio={albumSeleccionado.precio} estado={albumSeleccionado.estado} setMostrarAlbum={setMostrarAlbum} />}
+     {mostrarAlbum && <Album artista={albumSeleccionado.artista} nombre={albumSeleccionado.nombre} precio={albumSeleccionado.precio} estado={albumSeleccionado.estado} albumid={albumSeleccionado.id} setMostrarAlbum={setMostrarAlbum} />}
      
     </>
   );

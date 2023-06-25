@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import "react-bootstrap-typeahead/css/Typeahead.css";
+import contextVinil from "../../contexto/ContextVinil";
 
-const Album = ({ artista,nombre,precio,estado,id,setMostrarAlbum}) => {
+const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
   const [albumx, setAlbumx] = useState({});
+  const { usuario, setUsuario } = useContext(contextVinil);
 
   //*************
 
@@ -19,6 +21,24 @@ const Album = ({ artista,nombre,precio,estado,id,setMostrarAlbum}) => {
   }, [artista, nombre]);
 
   //*********************
+
+  const borrAlbum = async (albumid) => {
+    try {
+      const response = await fetch(`https://backend-vinilstore.vercel.app/eliminar`,
+      {method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${usuario.token}`},
+      body: JSON.stringify({albumid})
+      });
+
+      response ? alert(response): alert('sin response')
+
+      
+    } catch (error) {
+      console.log('Error al borrar:', error);
+    }
+  };
   return (
     
     <div className="card-group w-75 mx-auto pt-1 " style={{ height: "490px" }}>
@@ -89,7 +109,7 @@ const Album = ({ artista,nombre,precio,estado,id,setMostrarAlbum}) => {
         </div>
         <div className="d-flex justify-content-center">
         <button type="button" className="w-25 mx-auto btn-sm btn btn-success">editar</button>
-        <button type="button" className="w-25 mx-auto btn-sm btn btn-danger">eliminar</button>
+        <button type="button" onClick={()=>{borrAlbum(albumid)}} className="w-25 mx-auto btn-sm btn btn-danger">eliminar</button>
         </div>
       </div>
     </div>
