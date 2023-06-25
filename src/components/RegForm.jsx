@@ -12,7 +12,17 @@ function RegForm() {
     const email = form.elements.email.value;
     const ciudad = form.elements.ciudad.value;
     const password = form.elements.password.value;
+    const repassword = form.elements.repassword.value;
 
+    if (password !== repassword) {
+      
+      setAlertMessage('Las contraseñas no coinciden');
+      setAlertVariant('danger');
+      setTimeout(()=>{setAlertMessage(''); }, 3000);
+      
+    }
+   else
+   {
     try {
       const response = await fetch('https://backend-vinilstore.vercel.app/usuarios', {
         method: 'POST',
@@ -42,6 +52,7 @@ function RegForm() {
       setAlertVariant('danger');
       setTimeout(()=>{setAlertMessage('')}, 3000);
     }
+   }
   };
 
   return (
@@ -55,9 +66,9 @@ function RegForm() {
         <Form.Control className="fs-6" type="email" name="email" placeholder="Ingrese email" />
         <Form.Control className="fs-6" type="text" name="ciudad" placeholder="Ingrese ciudad" />
         <Form.Control className="fs-6" type="password" name="password" placeholder="Contraseña" />
-        <Form.Control className="fs-6" type="password" placeholder="Repita contraseña" />
+        <Form.Control className="fs-6" type="password" name="repassword"placeholder="Repita contraseña" />
         <Button type="submit" variant="success">
-          Ingresar <span><i className="bi bi-arrow-right ms-6"></i></span>
+          Registrar <span className='ms-3'> <i className="bi bi-send "></i></span>
         </Button>
       </Form>
     </div>

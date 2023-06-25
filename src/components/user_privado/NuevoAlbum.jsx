@@ -24,9 +24,9 @@ function NuevoAlbum() {
 
   const muestrAlbum = async (index)=>{
    let conUnpersand = albums[index].name
-   console.log('antes: '+conUnpersand);
+   
    conUnpersand = conUnpersand.replace('&','%26')
-   console.log('despues: '+conUnpersand);
+   
    const album_resp = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=17cc77161f71f4862428d38cc230c628&artist=${albums[index].artist.name}&album=${conUnpersand}&format=json`);
    const datalbum = await album_resp.json();
    setAlbumElegido(await datalbum)
@@ -95,7 +95,7 @@ function NuevoAlbum() {
             <div>album: {albumElegido.album.name}</div>
             <div>artista: {albumElegido.album.artist}</div>
             <div>pistas:</div>
-            <ul className="lh-1">
+            
             {albumElegido.album.tracks && albumElegido.album.tracks.track[0] ? (
               <>
                 
@@ -110,7 +110,7 @@ function NuevoAlbum() {
             ) : (
               <ul><li>{albumElegido.album.name}</li></ul>
             )}
-            </ul>
+            
             {alertMessage && <Alert className="fade show text-center" variant={alertVariant}>{alertMessage}</Alert>}
             <Button className="w-25 mx-auto fixed-bottom position-relative btn-sm" onClick={volver}>volver</Button>            
           </div>

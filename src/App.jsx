@@ -7,6 +7,7 @@ import SoloNavBar from './components/SoloNavBar';
 import NuevoAlbum from './components/user_privado/NuevoAlbum';
 import TusPublicaciones from './components/user_privado/TusPublicaciones';
 import Galeria from './components/Galeria';
+import Album from './components/user_privado/Album';
 
 
 
@@ -27,6 +28,7 @@ function App() {
       <Route path="/newalbum" element={<NuevoAlbum/>}/>
       <Route path="/publicaciones" element={<TusPublicaciones/>}/>
       <Route path="/galeria" element={<Galeria/>}/>
+      <Route path="/album" element={<Album/>}/>
       
     </Routes>
     </BrowserRouter>

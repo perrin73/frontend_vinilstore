@@ -1,16 +1,26 @@
 import { useContext, useEffect,useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import contextVinil from "../../contexto/ContextVinil";
+import Album from "./Album";
 
 function TusPublicaciones() {
   const { usuario, setUsuario } = useContext(contextVinil);
+  const [mostrarAlbum, setMostrarAlbum] = useState(false);
+  const [albumSeleccionado, setAlbumSeleccionado] = useState({});
+  
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!usuario.token || !usuario.datos || !usuario.datos.nombre) { navigate('/login')}  }, []);
 
     const [publicaciones, setPublicaciones] = useState([]);
-
+    
+    const navigateToAlbum = (artista, nombre,precio,estado,id) => {
+      setAlbumSeleccionado({ artista, nombre ,precio,estado,id});
+      setMostrarAlbum(true);
+    };
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -30,13 +40,17 @@ function TusPublicaciones() {
       };
   
       fetchData();
+
+      
     }, []);
+
+    
 
   return (
     <>
         
 
-       
+        {!mostrarAlbum && ( 
       <div className="row m-0">
         <div className="col-3">
         {usuario.datos && (
@@ -57,15 +71,21 @@ function TusPublicaciones() {
                   <p className="card-text">Artista: {publicacion.artista}</p>
                   <p className="card-text">Precio: $ {publicacion.precio.toLocaleString("es-CL")}</p>
                   <p className="card-text">Estado: {publicacion.estado}</p>
+                  <button type="button" className="btn btn-primary btn-sm" 
+                   onClick={() => navigateToAlbum(publicacion.artista, publicacion.nombre,publicacion.precio,publicacion.estado,publicacion.id)}>Ver más <i className="bi bi-eye-fill"></i>
+                  </button>
                 </div>
                 
               </div>
             </div>
           
         ))}
+
         </div>
        </div> 
       </div>
+      )}
+     {mostrarAlbum && <Album artista={albumSeleccionado.artista} nombre={albumSeleccionado.nombre} precio={albumSeleccionado.precio} estado={albumSeleccionado.estado} setMostrarAlbum={setMostrarAlbum} />}
      
     </>
   );

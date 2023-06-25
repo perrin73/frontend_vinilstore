@@ -8,7 +8,7 @@ function Landing() {
   const navigate = useNavigate();
   const { usuario } = useContext(contextVinil);
 
-  console.log('asi está usuario'+JSON.stringify(usuario))
+  
   return (
     
     usuario.token ? (  <Galeria/>):(
