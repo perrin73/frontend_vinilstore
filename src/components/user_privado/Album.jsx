@@ -48,12 +48,14 @@ const Album = ({ artista,nombre,precio,estado,id,setMostrarAlbum}) => {
         className="card justify-content-center"
         style={{ maxWidth: "800px", maxHeight: "500px" }}
       >
-        <img
-          className="mx-auto d-block"
-          src="https://lastfm.freetls.fastly.net/i/u/300x300/0035400731bc49c94c70d82b8c31accf.jpg"
-          alt="Imagen del álbum"
-          style={{ maxHeight: "75%", maxWidth: "75%" }}
-        />
+        {albumx.image && albumx.image[3]["#text"] && (
+          <img
+            className="mx-auto d-block"
+            src={albumx.image[3]["#text"]}
+            alt="Imagen del álbum"
+            style={{ maxHeight: "75%", maxWidth: "75%" }}
+          />
+        )}
         <div className="row mx-auto mt-1">
           <div className="col-6">
             <label htmlFor="precio" className="form-label">
