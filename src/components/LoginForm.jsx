@@ -11,6 +11,7 @@ function LoginForm() {
   const navigate = useNavigate();
   const [alertMessage, setAlertMessage] = useState('');
   const [alertVariant, setAlertVariant] = useState('');
+  const [estaCargando, setEstaCargando] = useState(false);
   const enviarLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,6 +19,7 @@ function LoginForm() {
     const password = form.elements.password.value;
 
   try {
+    setEstaCargando(true)
     const response = await fetch('https://backend-vinilstore.vercel.app/login', {
       
       method: 'POST',
@@ -29,6 +31,7 @@ function LoginForm() {
             
     if (response.ok) {
       const responseData = await response.json();
+      setEstaCargando(false)
       setAlertMessage('Usuario ingresó exitosamente');
       setAlertVariant('success');
       setUsuario({token: responseData.token,datos: responseData.datos});
@@ -47,6 +50,7 @@ function LoginForm() {
   }
 };
   return (
+    <>
     <div className="card pt-5 p-5 mw-25  h-50 position-absolute top-50 start-50 translate-middle d-flex justify-content-evenly">
       
       <h2 className='text-center'><span className="bi bi-disc-fill"></span> Login</h2>
@@ -60,6 +64,12 @@ function LoginForm() {
       </Form>
       
     </div>
+    { estaCargando ? (
+    <div className="text-center mt-2">
+    <img className="rotarimage" style={{ maxHeight: "75%",maxWidth: "75%" }} src={'../src/assets/disco.png'} alt="cargando"></img>
+    </div>):('')
+    } 
+    </>
   );
     }
 

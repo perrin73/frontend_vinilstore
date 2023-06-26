@@ -49,4 +49,4 @@ function SoloNavBar() {
   );
 }
 
-export default SoloNavBar;
+export default SoloNavBar; 
