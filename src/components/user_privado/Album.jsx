@@ -1,7 +1,9 @@
-import { Alert } from "react-bootstrap/";
+import {Alert} from "react-bootstrap/";
 import React, { useState, useEffect,useContext,useRef } from "react";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import contextVinil from "../../contexto/ContextVinil";
+
+
 
 const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
   const [albumx, setAlbumx] = useState({});
@@ -100,7 +102,7 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
     
     <div className="card-group w-75 mx-auto pt-1 " style={{ height: "490px" }}>
       <div className="card p-5 fichalbum justify-content-center">
-      {alertMessage && <Alert className="fade show text-center" variant={alertVariant}>{alertMessage}</Alert>}
+      {alertMessage && <Alert className="text-center" variant={alertVariant}>{alertMessage}</Alert>}
         <div>album: {albumx.name}</div>
         <div>artista: {albumx.artist}</div>
         <div>pistas:</div>
@@ -167,10 +169,11 @@ const Album = ({ artista,nombre,precio,estado,albumid,setMostrarAlbum}) => {
           </div>
         </div>
         <div className="d-flex justify-content-center">
-        <button type="button" onClick={()=>{editAlbum(albumid,precioRef.current.value,estadoRef.current.value)}}className="w-25 mx-auto btn-sm btn btn-success">editar</button>
-        <button type="button" onClick={()=>{borrAlbum(albumid)}} className="w-25 mx-auto btn-sm btn btn-danger">eliminar</button>
+        <button type="button" onClick={()=>{editAlbum(albumid,precioRef.current.value,estadoRef.current.value)}} className="w-25 mx-auto btn-sm btn btn-success">editar</button>
+        <button type="button" onClick={()=>{borrAlbum(albumid)}} className="w-25 mx-auto btn-sm btn btn-danger" >eliminar</button>
         </div>
       </div>
+      
     </div>
   );
 };

@@ -26,9 +26,7 @@ function LoginForm() {
       },
       body: JSON.stringify({email,password})
     });
-    
-    console.log(response)
-    
+            
     if (response.ok) {
       const responseData = await response.json();
       setAlertMessage('Usuario ingresó exitosamente');
