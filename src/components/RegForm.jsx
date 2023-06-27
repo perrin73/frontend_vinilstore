@@ -57,7 +57,7 @@ function RegForm() {
   };
 
   return (
-    <div className="card pt-5 p-5 mw-25 h-75 position-absolute top-50 start-50 translate-middle d-flex justify-content-center">
+    <div className="card pt-5 p-5 mw-50 h-75 position-absolute top-50 start-50 translate-middle d-flex justify-content-center">
       <h2 className="text-center">
         <span className="bi bi-disc-fill"></span> Registrarse
       </h2>

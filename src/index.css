@@ -52,6 +52,11 @@ table tr {
   vertical-align: middle;
 }
 
+#root > nav > div > button{
+
+  border: white solid 2px !important;
+}
+
 
 
 

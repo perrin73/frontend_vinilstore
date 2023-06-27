@@ -68,7 +68,7 @@ function LoginForm() {
     </div>
     { estaCargando ? (
     <div className="text-center mt-2">
-    <img className="rotarimage" style={{ maxHeight: "75%",maxWidth: "75%" }} src={'../assets/vinyl-record.png'} alt="cargando"></img>
+    <img className="rotarimage" style={{ maxHeight: "75%",maxWidth: "75%" }} src={'./vinyl-record.png'} alt="cargando"></img>
     </div>):('')
     } 
     </>

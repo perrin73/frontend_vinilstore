@@ -27,7 +27,7 @@ function NuevoAlbum() {
    
    conUnpersand = conUnpersand.replace('&','%26')
    
-   const album_resp = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=17cc77161f71f4862428d38cc230c628&artist=${albums[index].artist.name}&album=${conUnpersand}&format=json`);
+   const album_resp = await fetch(`https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=17cc77161f71f4862428d38cc230c628&artist=${albums[index].artist.name}&album=${conUnpersand}&format=json`);
    const datalbum = await album_resp.json();
    setAlbumElegido(await datalbum)
    
