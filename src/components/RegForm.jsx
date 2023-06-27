@@ -1,10 +1,11 @@
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 function RegForm() {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertVariant, setAlertVariant] = useState('');
-
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -41,7 +42,7 @@ function RegForm() {
         setAlertMessage('Usuario se agregó exitosamente ahora le enviaremos a login');
         setAlertVariant('success');
         form.reset();
-        setTimeout(()=>{setAlertMessage(''); window.location.assign('/login')}, 3000);
+        setTimeout(()=>{setAlertMessage(''); navigate(`/publicaciones`)}, 3000);
       } else {
         setAlertMessage('Usuario no se agregó hubo un error ¿llenó todos los campos?');
         setAlertVariant('danger');
