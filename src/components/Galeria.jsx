@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
+import contextVinil from "../contexto/ContextVinil";
 import { useNavigate } from "react-router-dom";
 
 function Galeria() {
@@ -6,18 +7,31 @@ function Galeria() {
   const [filtroEstado, setFiltroEstado] = useState("");
   const [filtroNombre, setFiltroNombre] = useState("");
   const [publicacionesFiltradas, setPublicacionesFiltradas] = useState([]);
-
+  const { usuario, setUsuario,agregarAlCarrito,carrito } = useContext(contextVinil);
+  const [conLogin, setConLogin] = useState(false);
+  const [estaCargando, setEstaCargando] = useState(false);
   useEffect(() => {
+
+    if(Object.keys(usuario).length !== 0){setConLogin(true)}
     const fetchData = async () => {
+      setEstaCargando(true)
       try {
         const response = await fetch(
           "https://backend-vinilstore.vercel.app/laspublicaciones",
           { method: "GET" }
         );
-        const data = await response.json();
+        let data = await response.json();
+        
+        if(usuario.id){
+          data = data.filter((publi)=>
+              publi.id == usuario.id
+          )
+        }
         setPublicaciones(data.data);
+        setEstaCargando(false)
       } catch (error) {
         console.log("Error fetching data:", error);
+        setEstaCargando(false)
       }
     };
 
@@ -27,6 +41,14 @@ function Galeria() {
   useEffect(() => {
     const filtrarPublicaciones = () => {
       let publicacionesFiltradas = publicaciones;
+      
+      if (conLogin){
+      publicacionesFiltradas = publicacionesFiltradas.filter(
+        (publicacion) => publicacion.usuario_id !== usuario.datos.id
+      );
+      }
+
+      console.table(publicacionesFiltradas)
 
       // Filtrar por estado
       if (filtroEstado !== "") {
@@ -51,10 +73,14 @@ function Galeria() {
     filtrarPublicaciones();
   }, [filtroEstado, filtroNombre, publicaciones]);
 
+  console.table(carrito)
+  
   return (
     <>
       <div className="row m-0">
-        <div className="col-3">
+        <div className="col-lg-3 col-md-3 col-sm-4">
+          
+          <div className="text-light mt-3 text-center mb-3 bg-dark rounded-5">filtro por estado :</div>
           <select
             className="form-select mb-2"
             value={filtroEstado}
@@ -66,7 +92,7 @@ function Galeria() {
             <option value="Defecto estetico">Defecto estetico</option>
             <option value="Defecto audio">Defecto audio</option>
           </select>
-
+          <div className="text-light mt-3 text-center mb-3 bg-dark rounded-5">filtro por nombre o artista :</div>
           <input
             type="text"
             className="form-control"
@@ -75,12 +101,17 @@ function Galeria() {
             onChange={(e) => setFiltroNombre(e.target.value)}
           />
         </div>
-        <div className="col-9">
+        <div className="col-lg-9 col-md-9 col-sm-12">
+        { estaCargando ? (
+          <div className="text-center mt-2">
+          <img className="rotarimage" style={{ maxHeight: "75%",maxWidth: "75%" }} src={'../src/assets/disco.png'} alt="cargando"></img>
+          </div>):('')
+          } 
           <div className="row mt-3">
             {publicacionesFiltradas.map((publicacion) => (
               <div
                 key={publicacion.id}
-                className="col-lg-3 mb-2 col-md-6 col-sm-12 mb-2"
+                className="col-lg-3 mb-2 col-md-4 col-sm-6 mb-2"
               >
                 <div className="card">
                   <img
@@ -98,6 +129,7 @@ function Galeria() {
                     </p>
                     <p className="card-text">{publicacion.estado}</p>
                   </div>
+                  {conLogin && (<button className="btn btn-sm btn-info mx-auto mb-1" style={{width:"40px"}} onClick={() => agregarAlCarrito(publicacion)}><i className="bi bi-cart"></i></button>)}
                 </div>
               </div>
             ))}

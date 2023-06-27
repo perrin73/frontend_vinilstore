@@ -8,7 +8,7 @@ import NuevoAlbum from './components/user_privado/NuevoAlbum';
 import TusPublicaciones from './components/user_privado/TusPublicaciones';
 import Galeria from './components/Galeria';
 import Album from './components/user_privado/Album';
-
+import Carro from './components/user_privado/carro';
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
       <Route path="/publicaciones" element={<TusPublicaciones/>}/>
       <Route path="/galeria" element={<Galeria/>}/>
       <Route path="/album" element={<Album/>}/>
+      <Route path="/carro" element={<Carro/>}/>
       
     </Routes>
     </BrowserRouter>

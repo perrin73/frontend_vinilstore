@@ -7,6 +7,7 @@ function TusPublicaciones() {
   const { usuario, setUsuario } = useContext(contextVinil);
   const [mostrarAlbum, setMostrarAlbum] = useState(false);
   const [albumSeleccionado, setAlbumSeleccionado] = useState({});
+  const [estaCargando, setEstaCargando] = useState(false);
   
 
 
@@ -24,6 +25,7 @@ function TusPublicaciones() {
     useEffect(() => {
       const fetchData = async () => {
         try {
+          setEstaCargando(true)
           const response = await fetch(`https://backend-vinilstore.vercel.app/publicaciones?userid=${usuario.datos.id}`,
           {method: 'GET',
           headers: {
@@ -34,8 +36,10 @@ function TusPublicaciones() {
           );
           const data = await response.json();
           setPublicaciones(data.data);
+          setEstaCargando(false)
         } catch (error) {
           console.log('Error fetching data:', error);
+          setEstaCargando(false)
         }
       };
   
@@ -48,6 +52,7 @@ function TusPublicaciones() {
 
   return (
     <>
+    
         
 
         {!mostrarAlbum && ( 
@@ -60,6 +65,11 @@ function TusPublicaciones() {
       )} 
         </div>
         <div className="col-9">
+              { estaCargando ? (
+          <div className="text-center mt-2">
+          <img className="rotarimage" style={{ maxHeight: "75%",maxWidth: "75%" }} src={'../src/assets/disco.png'} alt="cargando"></img>
+          </div>):('')
+          } 
           <div className="row mt-3">
           {publicaciones.map((publicacion) => (
             <div key={publicacion.id} className="col-lg-3 mb-2 col-md-6 col-sm-12">

@@ -29,11 +29,13 @@ function SoloNavBar() {
           <Nav >
           {usuario.token ? (
               <>
+                
                 <Nav.Link className='text-light' onClick={()=> navigate(`/`)}><i className="bi bi-collection-fill"></i> Store </Nav.Link>
                 <Nav.Link className='text-light' onClick={()=> navigate(`/newalbum`)}><i className="bi bi-heart-fill"></i> Mis favoritos </Nav.Link>
                 <Nav.Link className='text-light' onClick={()=> navigate(`/publicaciones`)}><i className="bi bi-chat-left-dots-fill"></i> Mis publicaciones </Nav.Link>
                 <Nav.Link className='text-light' onClick={()=> navigate(`/newalbum`)}><i className="bi bi-cloud-upload-fill"></i> Publicar album </Nav.Link>
                 <Nav.Link className='text-light' onClick={()=>{setUsuario({}); navigate(`/login`)}}><i className="bi bi-door-closed-fill"></i> Cerrar Sesion </Nav.Link>
+                <Nav.Link className='text-light' onClick={()=> navigate(`/carro`)}><i className="bi bi-cart-fill"></i></Nav.Link>
                 {/* Agrega más enlaces específicos para la ruta "/publicaciones" si es necesario */}
               </>
             ) : (

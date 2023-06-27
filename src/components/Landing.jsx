@@ -21,6 +21,7 @@ function Landing() {
         
       </div>
     </div>
+    <p className="fixed-bottom fs-6 fw-lighter text-center text-light marca p-0">© CGARATEA 2023</p>
   </div>)
   );
 }

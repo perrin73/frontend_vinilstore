@@ -39,11 +39,13 @@ function LoginForm() {
      
       
     } else {
+      setEstaCargando(false)
       setAlertMessage('Problemas con sus credenciales'); 
       setAlertVariant('danger');
       setTimeout(()=>{setAlertMessage('')}, 3000);
     }
   } catch (error) {
+    setEstaCargando(false)
     setAlertMessage('Sin respuesta del servidor');
     setAlertVariant('danger');
     setTimeout(()=>{setAlertMessage('')}, 3000);
