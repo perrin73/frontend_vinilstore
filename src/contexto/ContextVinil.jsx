@@ -6,8 +6,12 @@ const Provider = ({ children }) => {
   const [usuario, setUsuario] = useState({});
   const [carrito, setCarrito] = useState([]);
 
-  const agregarAlCarrito = (album) => {
+ /* const agregarAlCarrito = (album) => {
     setCarrito([...carrito, album]);
+  };*/
+
+  const agregarAlCarrito = (publicacion) => {
+    setCarrito([...carrito, { ...publicacion, id: carrito.length }]);
   };
 
   return (

@@ -5,8 +5,12 @@ const Carro = () => {
   const { carrito, setCarrito } = useContext(contextVinil);
 
   const eliminarDelCarrito = (albumId) => {
-    const nuevoCarrito = carrito.filter((album) => album.id !== albumId);
-    setCarrito(nuevoCarrito);
+    const albumIndex = carrito.findIndex((album) => album.id === albumId);
+    if (albumIndex !== -1) {
+      const nuevoCarrito = [...carrito];
+      nuevoCarrito.splice(albumIndex, 1);
+      setCarrito(nuevoCarrito);
+    }
   };
 
   const vaciarCarrito = () => {
@@ -19,7 +23,7 @@ const Carro = () => {
 
   return (
     <div className="p-3 m-3 bg-light rounded-3 text-center">
-      <h2>Carrito de Compras</h2>
+      <h2><span className="bi bi-cart"></span> Carrito de Compras <span className="bi bi-cart"></span></h2>
       {carrito.length === 0 ? (
         <p>No hay álbumes en el carrito.</p>
       ) : (
