@@ -9,6 +9,7 @@ import TusPublicaciones from './components/user_privado/TusPublicaciones';
 import Galeria from './components/Galeria';
 import Album from './components/user_privado/Album';
 import Carro from './components/user_privado/carro';
+import Favoritos from './components/user_privado/Favoritos';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <Route path="/galeria" element={<Galeria/>}/>
       <Route path="/album" element={<Album/>}/>
       <Route path="/carro" element={<Carro/>}/>
+      <Route path="/favoritos" element={<Favoritos/>}/>
       
     </Routes>
     </BrowserRouter>
