@@ -72,7 +72,7 @@ function Galeria() {
     setAgregado(true);
     setTimeout(() => {
       setAgregado(false);
-    }, 2000);
+    }, 3000);
   };
 
   return (

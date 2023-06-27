@@ -63,7 +63,7 @@ const Carro = () => {
           </tbody>
         </table>
       )}
-      <div className="d-flex flex-row justify-content-evenly">
+      <div className="d-flex flex-row justify-content-evenly" >
       <p>Total: ${calcularTotal().toLocaleString("es-CL")}</p>
       <p>Número de álbumes: {carrito.length}</p>
 
