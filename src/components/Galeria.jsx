@@ -115,7 +115,7 @@ function Galeria() {
               <img
                 className="rotarimage"
                 style={{ maxHeight: "75%", maxWidth: "75%" }}
-                src="/src/assets/disco.png"
+                src="/src/assets/vinyl-record.png"
                 alt="cargando"
               />
             </div>
